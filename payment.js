@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
  * Data essentials.  
  * ==========
  */ 
-var key = process.env.ISHA_KEY,
+var key = process.env.PAYU_KEY,
   	txnid = randString(32);
 
 
@@ -69,7 +69,7 @@ var createHash = (function(key, txn, a, fname, em, ph) {
 			 });
 		});			
 
-		hash.write(key + "|" + txn + "|" + a + "|" + "None" + "|" + fname + "|" + em + "|||||||||||" + process.env.ISHA_SALT);
+		hash.write(key + "|" + txn + "|" + a + "|" + "None" + "|" + fname + "|" + em + "|||||||||||" + process.env.PAYU_SALT);
 		hash.end();
 	});
 	return promise;
@@ -88,7 +88,7 @@ app.post("/checkout", (req, res) => {
 	res.render("form.ejs", {amount: app.locals.a});
 });
 
-// PAYMENTS ROUTE
+// PAYMENT ROUTE
 app.post("/payment", (req, res) => {	
 	// Get data from the body.
 	var fname = req.body.firstname,
